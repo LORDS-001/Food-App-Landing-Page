@@ -1,49 +1,61 @@
-import {
-  Pizza,
-  Beef,
-  Salad,
-  Fish,
-  Coffee,
-  IceCream,
-  Soup,
-  Croissant,
-  Cookie,
-} from "lucide-react"
+"use client"
+
+import { useState } from "react"
+import { Pizza, Beef, Salad, Fish, Coffee, IceCream, Soup, Croissant, Cookie, Flame } from "lucide-react"
 
 const categories = [
-  { label: "Pizza", icon: Pizza },
-  { label: "Burgers", icon: Beef },
-  { label: "Healthy", icon: Salad },
-  { label: "Sushi", icon: Fish },
-  { label: "Coffee", icon: Coffee },
-  { label: "Dessert", icon: IceCream },
-  { label: "Ramen", icon: Soup },
-  { label: "Bakery", icon: Croissant },
-  { label: "Snacks", icon: Cookie },
+  { label: "All", icon: Flame, count: "1,200" },
+  { label: "Pizza", icon: Pizza, count: "128" },
+  { label: "Burgers", icon: Beef, count: "94" },
+  { label: "Healthy", icon: Salad, count: "156" },
+  { label: "Sushi", icon: Fish, count: "72" },
+  { label: "Coffee", icon: Coffee, count: "211" },
+  { label: "Dessert", icon: IceCream, count: "89" },
+  { label: "Ramen", icon: Soup, count: "48" },
+  { label: "Bakery", icon: Croissant, count: "63" },
+  { label: "Late night", icon: Cookie, count: "37" },
 ]
 
 export function CategoriesStrip() {
+  const [active, setActive] = useState("All")
+
   return (
-    <section className="border-y border-border bg-muted/40">
-      <div className="mx-auto max-w-7xl px-6 py-8">
-        <div className="flex items-center justify-between gap-4">
-          <p className="shrink-0 text-sm text-muted-foreground">
-            Browse cravings
+    <section className="border-b border-border bg-background">
+      <div className="mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-8">
+        <div className="mb-4 flex items-center justify-between">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+            Browse by craving
           </p>
-          <div className="hidden text-xs text-muted-foreground md:block">
-            Scroll to explore →
-          </div>
+          <p className="hidden font-mono text-[11px] uppercase tracking-widest text-muted-foreground md:block">
+            {categories.length} categories
+          </p>
         </div>
-        <div className="mt-4 flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {categories.map(({ label, icon: Icon }) => (
-            <button
-              key={label}
-              className="group flex shrink-0 items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-sm"
-            >
-              <Icon className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />
-              <span className="text-sm font-medium">{label}</span>
-            </button>
-          ))}
+
+        <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] md:-mx-8 md:px-8 [&::-webkit-scrollbar]:hidden">
+          {categories.map(({ label, icon: Icon, count }) => {
+            const isActive = active === label
+            return (
+              <button
+                key={label}
+                onClick={() => setActive(label)}
+                className={`group flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-sm transition-all ${
+                  isActive
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-card text-foreground hover:border-muted-foreground/40"
+                }`}
+              >
+                <Icon className="h-4 w-4" />
+                <span className="font-medium">{label}</span>
+                <span
+                  className={`font-mono text-[10px] ${
+                    isActive ? "text-primary-foreground/70" : "text-muted-foreground"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            )
+          })}
         </div>
       </div>
     </section>

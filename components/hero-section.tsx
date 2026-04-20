@@ -1,127 +1,116 @@
 import Image from "next/image"
-import { ArrowRight, Search, Star, Clock, Building2 } from "lucide-react"
+import { ArrowUpRight, Clock, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 pt-16 pb-24 md:pt-24 md:pb-32">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-          {/* Left: copy */}
-          <div className="lg:col-span-7">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs text-muted-foreground">
-              <span className="inline-flex h-2 w-2 rounded-full bg-primary" />
-              Now delivering in 42 cities
-            </div>
+    <section className="relative overflow-hidden border-b border-border">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.035] grid-lines" aria-hidden />
 
-            <h1 className="text-balance font-sans text-5xl font-medium leading-[0.95] tracking-tight md:text-7xl lg:text-[5.5rem]">
-              Your city&apos;s kitchens,{" "}
-              <span className="font-serif italic text-primary">delivered</span>{" "}
+      <div className="mx-auto max-w-7xl px-4 pt-10 pb-16 md:px-8 md:pt-16 md:pb-24">
+        <div className="mb-10 flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground md:mb-16">
+          <div className="flex items-center gap-3">
+            <span className="flex h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_var(--primary)]" />
+            <span className="font-mono uppercase tracking-widest">Live in 12 cities</span>
+          </div>
+          <span className="font-mono uppercase tracking-widest">Issue No. 04 / Spring 26</span>
+        </div>
+
+        <div className="grid gap-10 md:grid-cols-12 md:gap-8">
+          <div className="md:col-span-8">
+            <h1 className="text-balance text-[14vw] font-medium leading-[0.92] tracking-[-0.04em] md:text-[128px]">
+              {"The city's best"}
+              <br />
+              kitchens,{" "}
+              <span className="font-serif italic text-primary">delivered</span>
+              <br />
               to your door.
             </h1>
 
-            <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              Order from hundreds of independent restaurants, bakeries, and home
-              kitchens. Hot food, straight to your apartment lobby in under 30
-              minutes.
+            <p className="mt-8 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+              Knock brings together 1,200+ independent vendors across your city — from the
+              taqueria down the block to the dim sum spot you keep meaning to try. One
+              basket, one courier, one knock.
             </p>
 
-            {/* Search bar */}
-            <div className="mt-8 flex max-w-xl flex-col gap-2 rounded-2xl border border-border bg-card p-2 shadow-sm sm:flex-row sm:items-center">
-              <div className="flex flex-1 items-center gap-3 px-3 py-2">
-                <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
+            <form className="mt-8 flex max-w-xl flex-col gap-2 rounded-2xl border border-border bg-card p-2 sm:flex-row sm:items-center">
+              <div className="flex items-center gap-2 px-3 text-muted-foreground sm:flex-1">
+                <span className="shrink-0 font-mono text-xs uppercase tracking-widest">
+                  Deliver to
+                </span>
                 <input
                   type="text"
-                  placeholder="Enter your apartment address"
-                  className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                  placeholder="123 Grand St, Apt 4B"
+                  className="w-full flex-1 bg-transparent py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
                 />
               </div>
               <Button
-                size="lg"
-                className="h-11 gap-2 rounded-xl bg-primary px-5 text-primary-foreground hover:bg-primary/90"
+                type="submit"
+                className="h-11 rounded-xl bg-primary px-5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
               >
                 Find food
-                <ArrowRight className="h-4 w-4" />
+                <ArrowUpRight className="ml-1 h-4 w-4" />
               </Button>
-            </div>
+            </form>
 
-            {/* Stats */}
-            <div className="mt-10 grid max-w-xl grid-cols-3 gap-6 border-t border-border pt-6">
-              <Stat value="1,200+" label="Local vendors" />
-              <Stat value="28 min" label="Avg delivery" />
-              <Stat value="4.9★" label="Rated by 80k" />
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1.5">
+                <Clock className="h-3.5 w-3.5 text-primary" />
+                <span>Avg. 24 min to your door</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+                <span>4.9 from 180k riders</span>
+              </div>
             </div>
           </div>
 
-          {/* Right: image composition */}
-          <div className="lg:col-span-5">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-md">
-              {/* Main hero image */}
-              <div className="absolute inset-0 overflow-hidden rounded-[2rem] border border-border bg-muted">
-                <Image
-                  src="/images/hero-dish.jpg"
-                  alt="A warm bowl of fresh pasta ready for delivery"
-                  fill
-                  priority
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Floating rating card */}
-              <div className="absolute -left-6 top-10 flex items-center gap-3 rounded-2xl border border-border bg-card p-3 pr-5 shadow-lg shadow-foreground/5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
-                  <Star className="h-5 w-5 fill-primary text-primary" />
+          <div className="md:col-span-4">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-border bg-card">
+              <Image
+                src="/images/hero-dish.jpg"
+                alt="Signature creamy pasta dish from a featured vendor"
+                fill
+                className="object-cover"
+                priority
+                sizes="(min-width: 768px) 33vw, 100vw"
+              />
+              <div className="absolute inset-x-4 bottom-4 rounded-xl border border-border bg-background/90 p-3 backdrop-blur-md">
+                <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                  <span>Order #A-4821</span>
+                  <span className="text-primary">On the way</span>
                 </div>
-                <div className="leading-tight">
-                  <div className="text-sm font-medium">4.9 rating</div>
-                  <div className="text-xs text-muted-foreground">
-                    from 82,431 orders
+                <div className="mt-2 flex items-end justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-medium leading-tight">Truffle Rigatoni</p>
+                    <p className="text-xs text-muted-foreground">{"Nonna's, Soho · 1.2 mi"}</p>
                   </div>
+                  <span className="font-mono text-xs text-foreground">8 min</span>
                 </div>
-              </div>
-
-              {/* Floating delivery card */}
-              <div className="absolute -right-4 bottom-16 flex items-center gap-3 rounded-2xl border border-border bg-card p-3 pr-5 shadow-lg shadow-foreground/5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-secondary-foreground">
-                  <Clock className="h-5 w-5" />
-                </div>
-                <div className="leading-tight">
-                  <div className="text-sm font-medium">Arriving in 22 min</div>
-                  <div className="text-xs text-muted-foreground">
-                    Courier 2 blocks away
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating apartment card */}
-              <div className="absolute -bottom-4 left-6 flex items-center gap-3 rounded-2xl bg-primary p-3 pr-5 text-primary-foreground shadow-xl shadow-primary/30">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-foreground/15">
-                  <Building2 className="h-5 w-5" />
-                </div>
-                <div className="leading-tight">
-                  <div className="text-sm font-medium">Apt 4B — Willow St</div>
-                  <div className="text-xs text-primary-foreground/80">
-                    Meet at lobby · Code #8421
-                  </div>
+                <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-muted">
+                  <div className="h-full w-2/3 rounded-full bg-primary" />
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-4">
+          {[
+            { k: "1,200+", v: "Local vendors" },
+            { k: "24 min", v: "Median delivery" },
+            { k: "12", v: "Cities served" },
+            { k: "4.9", v: "Rider rating" },
+          ].map((s) => (
+            <div key={s.v} className="bg-background p-5 md:p-6">
+              <div className="text-3xl font-medium tracking-tight md:text-4xl">{s.k}</div>
+              <div className="mt-1 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                {s.v}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
-  )
-}
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <div className="font-serif text-3xl tracking-tight md:text-4xl">
-        {value}
-      </div>
-      <div className="mt-1 text-xs text-muted-foreground md:text-sm">
-        {label}
-      </div>
-    </div>
   )
 }
